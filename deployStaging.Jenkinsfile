@@ -66,5 +66,6 @@ def generateDynamicMetaData(){
     returnValue += "Branch=${env.GIT_BRANCH} "
     returnValue += "Build=${env.BUILD} "
     returnValue += "Image=${env.TAG_STAGING} "
+    returnValue += "Owner=ace@dynatrace.com FriendlyName=simplenode SERVICE_TYPE=FRONTEND Project=simpleproject DesignDocument=https://simple-corp.com/stories/simplenodeservice Tier=1 Class=Gold"
     return returnValue;
 }
