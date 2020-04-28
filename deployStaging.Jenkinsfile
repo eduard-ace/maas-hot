@@ -85,7 +85,7 @@ stage('DT send test start event') {
 stage('Create Synth monitor') {
     steps {
         container("kubectl") {
-        steps {
+        script {
                 evn.PORT = sh "kubectl get svc -n staging simplenodeservice -o=jsonpath='{.spec.ports[0].nodePort}'"
                 } } container("curl") {
             script {
