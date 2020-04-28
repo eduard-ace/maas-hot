@@ -84,10 +84,12 @@ stage('DT send test start event') {
 }
 stage('Create Synth monitor') {
     steps {
-        container("curl") {
+        container("kubectl") {
+        steps {
+                def port = sh "kubectl get svc -n staging simplenodeservice -o=jsonpath='{.spec.ports[0].nodePort}'"
+                } } container("curl") {
             script {
             
-                def port = sh "kubectl get svc -n staging simplenodeservice -o=jsonpath='{.spec.ports[0].nodePort}'"
                 def status = dt_createUpdateSyntheticTest (
                     testName : "test",
                     url : "http://ace-box:" + port,
