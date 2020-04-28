@@ -74,8 +74,9 @@ stage('DT send test start event') {
                 def status = pushDynatraceInfoEvent (
                     tagRule : tagMatchRules,
                     deploymentVersion: "${env.BUILD}",
-                    description: "Tests stopped",
-                    title: "Tests stopped"
+                    description: "Tests started",
+                    title: "Tests started",
+                    source: "EL JENKINS"
                 )
             }
         }
@@ -98,7 +99,8 @@ stage('DT send test stop event') {
                     tagRule : tagMatchRules,
                     deploymentVersion: "${env.BUILD}",
                     description: "Tests stopped",
-                    title: "Tests stopped"
+                    title: "Tests stopped",
+                    source: "EL JENKINS"
                 )
             }
         }
