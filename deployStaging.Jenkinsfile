@@ -93,7 +93,7 @@ stage('Create Synth monitor') {
             script {
                 def status = dt_createUpdateSyntheticTest (
                     testName : "test",
-                    url : "http://ace-box:" + env.PORT,
+                    url : "http://ace-box:31500",
                     location : "SYNTHETIC_LOCATION-9B09B9DD4662EE10"
                 )
             }
