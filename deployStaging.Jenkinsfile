@@ -48,6 +48,37 @@ pipeline {
                 }
             }
         }
+        stage('DT send deploy event') {
+    steps {
+        container("curl") {
+            script {
+                def status = pushDynatraceDeploymentEvent (
+                    tagRule : tagMatchRules,
+                    deploymentVersion: "${env.BUILD}",
+                    customProperties : [
+                        [key: 'Jenkins Build Number', value: "${env.BUILD_ID}"],
+                        [key: 'Git commit', value: "${env.GIT_COMMIT}"]
+                    ]
+                )
+            }
+        }
+    }
+}
+
+stage('DT send test start event') {
+    steps {
+        container("curl") {
+            script {
+                def status = pushDynatraceInfoEvent (
+                    tagRule : tagMatchRules,
+                    deploymentVersion: "${env.BUILD}",
+                    description: "Tests stopped",
+                    title: "Tests stopped"
+                )
+            }
+        }
+    }
+}
 
         stage('Run tests') {
             steps {
@@ -57,6 +88,21 @@ pipeline {
                 ]
             }
         }  
+stage('DT send test stop event') {
+    steps {
+        container("curl") {
+            script {
+                def status = pushDynatraceInfoEvent (
+                    tagRule : tagMatchRules,
+                    deploymentVersion: "${env.BUILD}",
+                    description: "Tests stopped",
+                    title: "Tests stopped"
+                )
+            }
+        }
+    }
+}        
+      
     }
 }
 
