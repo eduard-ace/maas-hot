@@ -86,9 +86,11 @@ stage('Create Synth monitor') {
     steps {
         container("curl") {
             script {
+            
+                def port = kubectl get svc -n staging simplenodeservice -o=jsonpath='{.spec.ports[0].nodePort}'
                 def status = dt_createUpdateSyntheticTest (
                     testName : "test",
-                    url : "http://ace-box:31500",
+                    url : "http://ace-box:" + port,
                     location : "SYNTHETIC_LOCATION-9B09B9DD4662EE10"
                 )
             }
