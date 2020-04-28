@@ -82,6 +82,19 @@ stage('DT send test start event') {
         }
     }
 }
+stage('Create Synth monitor') {
+    steps {
+        container("curl") {
+            script {
+                def status = dt_createUpdateSyntheticTest (
+                    testname : "test",
+                    url : "http://localhost:31500"
+                    location : "lll"
+                )
+            }
+        }
+    }
+}
 
         stage('Run tests') {
             steps {
