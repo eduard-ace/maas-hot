@@ -87,7 +87,7 @@ stage('Create Synth monitor') {
         container("curl") {
             script {
                 def status = dt_createUpdateSyntheticTest (
-                    testname : "test",
+                    testName : "test",
                     url : "http://localhost:31500",
                     location : "lll"
                 )
